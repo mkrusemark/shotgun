@@ -393,7 +393,7 @@ handle_info({gun_up, Pid, _Protocol}, StateName, StateData = #{pid := Pid}) ->
 handle_info({gun_down, Pid, Protocol, Reason, KilledStreams},
             _StateName,
             StateData = #{pid := Pid}) ->
-    error_logger:warning_msg("~p connection down on ~p: ~p (Killed: ~p)",
+    lager:warning("~p connection down on ~p: ~p (Killed: ~p)",
                              [Protocol, Pid, Reason, KilledStreams]),
     gun:shutdown(Pid),
     CleanStateData = clean_state_data(StateData),
